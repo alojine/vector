@@ -1,3 +1,4 @@
+
 #include "headers.h"
 #include "Studentas.h"
 #include "functions.h"
@@ -19,3 +20,5 @@ int main()
 
 	system("pause");
 }
+
+

@@ -3,8 +3,9 @@
 #include "functions.h"
 
 // Skaiciavimai
-double vidurkis(vector<int> p, int egz)
-{
+double vidurkis(Vector<int> p, int egz)
+{	
+	
 	double v = 0;
 	for (auto& el : p)
 	{
@@ -17,13 +18,14 @@ double vidurkis(vector<int> p, int egz)
 		v = egz * 0.6;
 
 	return v;
+	
 };
 
-double mediana(vector<int> p, int egz)
+double mediana(Vector<int> p, int egz)
 {
 
 	double m, s;
-	sort(p.begin(), p.end());
+	std::sort(p.begin(), p.end());
 	if (p.size() % 2 == 0 && p.size() != 0)
 	{
 		m = (double)((p[p.size() / 2] + p[p.size() / 2 - 1]) / 2);
@@ -39,7 +41,8 @@ double mediana(vector<int> p, int egz)
 	return s;
 };
 
-void skaiciavimai(vector<data>& st, char vm)
+/*
+void skaiciavimai(Vector<data>& st, char vm)
 {
 	for (auto& el : st)
 	{
@@ -54,6 +57,7 @@ void skaiciavimai(vector<data>& st, char vm)
 		}
 	}
 };
+*/
 
 // Apsaugos
 int sveikojoApsauga(int& a)
@@ -100,6 +104,7 @@ int genrand()
 
 // Funkcijos Terminalui
 void Ranka() {
+	/*
 	vector<data> st;
 	cout << "Jei norite kad programa isvestu vidurki iveskite 'y', jeigu mediana, iveskite 'n': ";
 	char vm = charApsauga(vm);
@@ -122,6 +127,7 @@ void Ranka() {
 	}
 
 	st.clear();
+	*/
 }
 
 void skaitymasRanka(data& st) {
@@ -201,9 +207,9 @@ void automatinisGen()
 	{
 		try
 		{
-			vector<Studentas> s;
-			vector<Studentas> Kieti;
-			vector<Studentas> Vargsai;												   // Klases
+			Vector<Studentas> s;
+			Vector<Studentas> Kieti;
+			Vector<Studentas> Vargsai;												   // Klases
 			string fname = "studentai", n = "nuskriaustukai.txt", k = "kietiakai.txt"; // Failai
 			cout << "Iveskite studentu kieki: ";
 			int skiekis = sveikojoApsauga(skiekis);
@@ -213,10 +219,10 @@ void automatinisGen()
 			if (!(egzistuojaFailas(fname)))
 				generuotifailus(fname, skiekis, 5);
 			skaitymas(s, fname);
-			sort(s.begin(), s.end(), rikiuotiPazymi);
+			std::sort(s.begin(), s.end(), rikiuotiPazymi);
 			paskirstymas(s, Kieti, Vargsai, vm, st);
-			sort(Kieti.begin(), Kieti.end(), rikiuotiVarda);
-			sort(Vargsai.begin(), Vargsai.end(), rikiuotiVarda);
+			std::sort(Kieti.begin(), Kieti.end(), rikiuotiVarda);
+			std::sort(Vargsai.begin(), Vargsai.end(), rikiuotiVarda);
 
 			rasymas(Kieti, k, vm);
 			rasymas(Vargsai, n, vm);
@@ -242,14 +248,14 @@ void automatinisGen()
 
 void automatinisBeGen()
 {
-	vector<Studentas> s;
+	Vector<Studentas> s;
 	try
 	{
 		cout << "(Vidurkis/Mediana) - (y/n) ";
 		char vm = charApsauga(vm);
 		string kursiokai = "kursiokai.txt";
 		skaitymas(s, "studentai.txt");
-		sort(s.begin(), s.end(), rikiuotiPazymi);
+		std::sort(s.begin(), s.end(), rikiuotiPazymi);
 		rasymas(s, kursiokai, vm);
 	}
 	catch (std::exception& e)
@@ -299,7 +305,7 @@ void generuotifailus(string& failopavadinimas, int kiek, int nd)
 	rf.close();
 }
 
-void skaitymas(vector<Studentas>& s, string fname)
+void skaitymas(Vector<Studentas>& s, string fname)
 {
 	auto laikasSkaitymas = hrClock::now();
 	ifstream fd(fname);
@@ -344,14 +350,14 @@ void skaitymas(vector<Studentas>& s, string fname)
 	cout << "Failo nuskaitymas uztruko: " << durationDouble(hrClock::now() - laikasSkaitymas).count() << " s" << endl;
 }
 
-void paskirstymas(vector<Studentas>& s, vector<Studentas>& Kieti, vector<Studentas>& Vargsai, char vm, char stratType)
+void paskirstymas(Vector<Studentas>& s, Vector<Studentas>& Kieti, Vector<Studentas>& Vargsai, char vm, char stratType)
 {
 
 	auto laikasSkirstymas = hrClock::now();
 
 	if (stratType == 'n')
 	{
-		vector<Studentas>::iterator it = s.end();
+		Vector<Studentas>::iterator it = s.end();
 		it--;
 
 		if (vm == 'y')
@@ -410,10 +416,10 @@ void paskirstymas(vector<Studentas>& s, vector<Studentas>& Kieti, vector<Student
 	cout << "Failo skirstymas i grupes uztruko: " << durationDouble(hrClock::now() - laikasSkirstymas).count() << " s" << endl;
 }
 
-void rasymas(vector<Studentas>& s, string fname, char vm)
+void rasymas(Vector<Studentas>& s, string fname, char vm)
 {
 	auto laikasNuskriaustukai = hrClock::now();
-	vector<Studentas>::iterator it;
+	Vector<Studentas>::iterator it;
 
 	std::stringstream buffer;
 	buffer << std::left << std::setw(20) << "Vardas" << std::left << std::setw(20) << "Pavarde";

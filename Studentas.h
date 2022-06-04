@@ -1,6 +1,7 @@
 #pragma once
 
 #include "headers.h"
+#include "Vector.h"
 
 class Zmogus {
 protected:
@@ -24,7 +25,7 @@ public:
 class Studentas : public Zmogus {
 private:
 	int egz_;
-	vector<int> p_;
+	Vector<int> p_;
 	double vidurkis_;
 	double mediana_;
 public:
@@ -54,7 +55,7 @@ public:
 	// get
 	const string& getVardas() const override;
 	const string& getPavarde() const override;
-	inline vector<int> getPazymius() const { return p_; }
+	inline Vector<int> getPazymius() const { return p_; }
 	inline double getVidurkis() const { return vidurkis_; }
 	inline double getMediana() const { return mediana_; }
 	inline int getEgzaminas() const { return egz_; }
